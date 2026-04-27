@@ -1,17 +1,90 @@
 ---
+import Layout from '../layouts/Layout.astro';
 
+const name = "Your Name";
+const bio = "A brief introduction about yourself.";
+const github = "https://github.com/xuhe2";
+const blog = "https://www.cnblogs.com/xuhe2";
+const email = "your.email@example.com";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title={`${name} - Personal Homepage`}>
+  <header>
+    <h1>{name}</h1>
+    <h2>{bio}</h2>
+  </header>
+
+  <section>
+    <h3>About</h3>
+    <p>
+      Write something about yourself here. Your interests, what you do, etc.
+    </p>
+  </section>
+
+  <section>
+    <h3>Links</h3>
+    <ul class="links">
+      <li>
+        <a href={github} target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+      </li>
+      <li>
+        <a href={blog} target="_blank" rel="noopener noreferrer">
+          Blog
+        </a>
+      </li>
+      <li>
+        <a href={`mailto:${email}`}>
+          Email
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; {new Date().getFullYear()} {name}</p>
+  </footer>
+</Layout>
+
+<style>
+  header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  section {
+    margin-bottom: 2.5rem;
+  }
+
+  h3 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+  }
+
+  .links {
+    list-style: none;
+  }
+
+  .links li {
+    margin-bottom: 0.75rem;
+  }
+
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--secondary-color);
+    font-size: 0.875rem;
+  }
+</style>
