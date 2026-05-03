@@ -4,7 +4,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Personal homepage" } = Astro.props;
+const { title, description = "徐赫的个人主页" } = Astro.props;
 ---
 
 <!doctype html>
@@ -13,11 +13,16 @@ const { title, description = "Personal homepage" } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#f7f8f5" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
-    <main>
+    <main id="content">
       <slot />
     </main>
   </body>
@@ -25,12 +30,21 @@ const { title, description = "Personal homepage" } = Astro.props;
 
 <style is:global>
   :root {
-    --bg-color: #ffffff;
-    --text-color: #333333;
-    --accent-color: #2563eb;
-    --secondary-color: #666666;
-    --border-color: #e5e5e5;
-    --max-width: 640px;
+    color-scheme: light;
+    --bg-color: #f7f8f5;
+    --surface-color: #ffffff;
+    --surface-muted: #eef3ef;
+    --text-color: #151b18;
+    --muted-color: #5f6d64;
+    --subtle-color: #7d8b82;
+    --border-color: #dfe6df;
+    --accent-color: #157f6f;
+    --accent-strong: #0f5f54;
+    --accent-warm: #c65f3c;
+    --accent-cool: #3d6f9f;
+    --shadow-color: 34 49 39;
+    --max-width: 1120px;
+    --page-padding: 24px;
   }
 
   * {
@@ -40,58 +54,109 @@ const { title, description = "Personal homepage" } = Astro.props;
   }
 
   html {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      "PingFang SC", "Microsoft YaHei", sans-serif;
     font-size: 16px;
-    line-height: 1.6;
     color: var(--text-color);
     background-color: var(--bg-color);
+    scroll-behavior: smooth;
   }
 
   body {
-    padding: 2rem 1rem;
+    min-width: 320px;
+    min-height: 100vh;
+    line-height: 1.7;
+    overflow-x: hidden;
+    background:
+      linear-gradient(rgba(21, 27, 24, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(21, 27, 24, 0.045) 1px, transparent 1px),
+      linear-gradient(145deg, #f7f8f5 0%, #f1f6f3 44%, #fbf7f1 100%);
+    background-size: 44px 44px, 44px 44px, auto;
   }
 
   main {
-    max-width: var(--max-width);
-    margin: 0 auto;
+    min-height: 100vh;
   }
 
   a {
     color: var(--accent-color);
     text-decoration: none;
+    text-underline-offset: 0.22em;
   }
 
   a:hover {
     text-decoration: underline;
   }
 
-  h1, h2, h3 {
+  a:focus-visible,
+  button:focus-visible {
+    outline: 3px solid rgba(21, 127, 111, 0.28);
+    outline-offset: 3px;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3 {
     font-weight: 600;
-    line-height: 1.3;
-  }
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  h2 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    color: var(--secondary-color);
+    line-height: 1.15;
   }
 
   p {
-    margin-bottom: 1rem;
+    color: var(--muted-color);
+  }
+
+  ::selection {
+    color: #ffffff;
+    background: var(--accent-strong);
+  }
+
+  @media (max-width: 760px) {
+    :root {
+      --page-padding: 18px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.001ms !important;
+    }
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg-color: #111111;
-      --text-color: #e5e5e5;
-      --accent-color: #60a5fa;
-      --secondary-color: #888888;
-      --border-color: #333333;
+      color-scheme: dark;
+      --bg-color: #101411;
+      --surface-color: #171d19;
+      --surface-muted: #1e2821;
+      --text-color: #edf3ee;
+      --muted-color: #aab8ae;
+      --subtle-color: #859489;
+      --border-color: #2d3931;
+      --accent-color: #63c7b8;
+      --accent-strong: #8bded3;
+      --accent-warm: #e19879;
+      --accent-cool: #8eb5df;
+      --shadow-color: 0 0 0;
+    }
+
+    body {
+      background:
+        linear-gradient(rgba(237, 243, 238, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(237, 243, 238, 0.04) 1px, transparent 1px),
+        linear-gradient(145deg, #101411 0%, #121a16 48%, #181612 100%);
+      background-size: 44px 44px, 44px 44px, auto;
     }
   }
 </style>
