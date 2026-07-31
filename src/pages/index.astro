@@ -12,1111 +12,1530 @@ import {
   skills,
 } from "../data/profile";
 
-const pageTitle = `${profile.name} (${profile.englishName}) | ${profile.role}`;
-const description = `${profile.name}的个人主页，展示后端工程、AI 应用、科研论文、开源项目与技术写作。`;
+const pageTitle = `${profile.name} (${profile.englishName}) — ${profile.role}`;
+const description = `${profile.name}的个人主页，关注 Audio 相关方向、AI 系统与软件工程。`;
+const waveform = [
+  18, 26, 38, 58, 84, 48, 72, 112, 66, 42, 92, 138, 74, 52, 118, 162, 94, 60, 128,
+  78, 46, 98, 142, 70, 44, 82, 116, 64, 36, 54, 76,
+];
 ---
 
 <Layout title={pageTitle} description={description}>
-  <div class="site-shell">
-    <header class="topbar" aria-label="页面导航">
-      <a class="brand" href="/" aria-label={`${profile.name} home`}>
-        <span class="brand-mark" aria-hidden="true">XH</span>
-        <span>
-          <strong>{profile.name}</strong>
-          <small>{profile.handle}</small>
-        </span>
-      </a>
-      <nav class="nav-links" aria-label="主要导航">
-        <a href="#experience">实习</a>
-        <a href="#research">科研</a>
-        <a href="#opensource">开源</a>
-        <a href="#contact">联系</a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="monogram" href="#top" aria-label={`${profile.name} 首页`}>XH</a>
+      <p><strong>{profile.englishName}</strong><span>Personal index · 2026</span></p>
+      <nav aria-label="主要导航">
+        <a href="#experience"><span>01</span>经历</a>
+        <a href="#work"><span>02</span>工作</a>
+        <a href="#about"><span>03</span>关于</a>
       </nav>
-    </header>
+      <a class="header-mail" href={`mailto:${profile.email}`}>Email ↗</a>
+    </div>
+  </header>
 
+  <div class="page-shell" id="top">
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">{profile.role}</p>
-        <h1 id="hero-title">
-          {profile.name}
-          <span>{profile.englishName}</span>
-        </h1>
-        <p class="tagline">{profile.tagline}</p>
-        <p class="intro">{profile.intro}</p>
-        <div class="hero-actions" aria-label="个人链接">
-          <a class="button primary" href={profile.github} target="_blank" rel="noreferrer">
-            GitHub
-            <span aria-hidden="true">↗</span>
-          </a>
-          <a class="button secondary" href={profile.blog} target="_blank" rel="noreferrer">
-            技术博客
-            <span aria-hidden="true">↗</span>
-          </a>
-          <a class="button secondary" href={`mailto:${profile.email}`}>
-            邮件联系
-            <span aria-hidden="true">✉</span>
-          </a>
-        </div>
+      <div class="hero-meta">
+        <p><span class="signal-dot"></span>Available for conversation</p>
+        <p>{profile.role}</p>
+        <p>{profile.location} · UTC+8</p>
       </div>
 
-      <aside class="profile-card magnetic-card" aria-label="个人摘要">
-        <div class="profile-card-head">
-          <div class="avatar-frame">
-            <img src={profile.avatar} width="96" height="96" alt={`${profile.name} avatar`} />
-          </div>
-          <div class="profile-card-content">
-            <p class="profile-kicker">Currently</p>
-            <h2>ByteDance Intern</h2>
-            <p>TikTok Product Infra 智能客服平台研发实习，关注 AI SOP、智能客服自动化和后端服务稳定性。</p>
-          </div>
-        </div>
-        <div class="status-list" aria-label="首屏摘要">
-          <div>
-            <small>Education</small>
-            <strong>浙江理工大学</strong>
-            <span>计算机科学与技术（全英文授课）本科</span>
-          </div>
-          <div>
-            <small>Next</small>
-            <strong>东南大学</strong>
-            <span>软件工程硕士，推免录取</span>
-          </div>
-        </div>
-        <div class="contact-list" aria-label="公开链接">
-          {
-            links.map((item) => (
-              <a href={item.href} target={item.href.startsWith("mailto:") ? undefined : "_blank"} rel="noreferrer">
-                <span>
-                  <strong>{item.label}</strong>
-                  <small>{item.note}</small>
-                </span>
-                <span aria-hidden="true">↗</span>
-              </a>
-            ))
-          }
-        </div>
-      </aside>
-    </section>
-
-    <section class="signal-strip" aria-label="工程原则">
-      {
-        principles.map((item) => (
-          <div>
-            <span aria-hidden="true"></span>
-            <p>{item}</p>
-          </div>
-        ))
-      }
-    </section>
-
-    <section class="section" id="education" aria-labelledby="education-title">
-      <div class="section-heading">
-        <p class="eyebrow">Education</p>
-        <h2 id="education-title">教育背景</h2>
+      <div class="hero-name">
+        <h1 id="hero-title"><span>Xu</span> <span>He</span><i>.</i></h1>
+        <p>徐赫</p>
       </div>
-      <div class="timeline-grid">
-        {
-          education.map((item) => (
-            <article class="timeline-card magnetic-card">
-              <div class="timeline-meta">
-                <span>{item.degree}</span>
-                <time>{item.time}</time>
-              </div>
-              <h3>{item.school}</h3>
-              <p>{item.major}</p>
-              <ul class="compact-list">
-                {item.details.map((detail) => (
-                  <li>{detail}</li>
-                ))}
-              </ul>
-            </article>
-          ))
-        }
+
+      <div class="hero-lower">
+        <div class="hero-statement">
+          <span>Position / 位置</span>
+          <h2>研究声音，<br />构建系统。</h2>
+        </div>
+        <div class="hero-bio">
+          <span>Profile / 简介</span>
+          <p>{profile.intro}</p>
+          <div class="hero-links">
+            <a href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+            <a href={profile.blog} target="_blank" rel="noreferrer">Writing ↗</a>
+          </div>
+        </div>
+        <article class="focus-block">
+          <div>
+            <span>Recently exploring</span>
+            <strong>Audio<br />Exploration</strong>
+          </div>
+          <div class="mini-wave" aria-hidden="true">
+            {waveform.slice(5, 26).map((height, index) => <i style={`--bar:${height / 2}px;--delay:${index * -45}ms`}></i>)}
+          </div>
+          <span class="focus-note">Ongoing / 暂无公开链接</span>
+        </article>
       </div>
     </section>
 
-    <section class="section" id="experience" aria-labelledby="experience-title">
-      <div class="section-heading">
-        <p class="eyebrow">Experience</p>
-        <h2 id="experience-title">实习经历</h2>
+    <div class="direction-bar" aria-label="关注方向">
+      <span>Current directions</span>
+      <div>
+        {principles.map((item, index) => <p><i>{String(index + 1).padStart(2, "0")}</i>{item}</p>)}
       </div>
+    </div>
+
+    <section class="index-section" id="experience" aria-labelledby="experience-title">
+      <header class="section-heading">
+        <span class="section-number">01</span>
+        <div>
+          <p>Experience / 经历</p>
+          <h2 id="experience-title">工程实践</h2>
+        </div>
+        <p>在真实业务里处理复杂链路、模型不确定性与系统稳定性，让 AI 能力可靠地落到产品中。</p>
+      </header>
+
       {
         experience.map((item) => (
-          <article class="experience-card magnetic-card">
-            <div class="experience-head">
-              <div>
-                <p class="eyebrow">{item.company} · {item.location}</p>
-                <h3>{item.role}</h3>
-              </div>
+          <article class="experience-entry">
+            <div class="experience-side">
+              <span>{item.status}</span>
               <time>{item.time}</time>
+              <p>{item.location} / CN</p>
             </div>
-            <p class="experience-summary">{item.summary}</p>
-            <ul class="tag-list" aria-label={`${item.company} tags`}>
-              {item.tags.map((tag) => (
-                <li>{tag}</li>
-              ))}
-            </ul>
+            <div class="experience-main">
+              <p>{item.company} · TikTok Product Infra</p>
+              <h3>{item.role}</h3>
+              <p class="experience-summary">{item.summary}</p>
+              <ul aria-label="实习关键词">
+                {item.tags.map((tag) => <li>{tag}</li>)}
+              </ul>
+            </div>
+            <div class="company-type" aria-hidden="true">
+              <span>BYTE</span>
+              <span>DANCE</span>
+            </div>
           </article>
         ))
       }
     </section>
 
-    <section class="section" id="research" aria-labelledby="research-title">
-      <div class="section-heading">
-        <p class="eyebrow">Research</p>
-        <h2 id="research-title">科研论文</h2>
-      </div>
-      <div class="research-list">
-        {
-          research.map((item) => (
-            <a class="research-item magnetic-card" href={item.href} target="_blank" rel="noreferrer">
-              <span class="work-meta">{item.time}</span>
-              <strong>{item.title}</strong>
-              <p>{item.paper}</p>
-              <small>{item.result}</small>
-              <span class="work-arrow" aria-hidden="true">↗</span>
-            </a>
-          ))
-        }
+    <section class="index-section" id="work" aria-labelledby="work-title">
+      <header class="section-heading">
+        <span class="section-number">02</span>
+        <div>
+          <p>Selected work / 精选工作</p>
+          <h2 id="work-title">研究与项目</h2>
+        </div>
+        <p>我关注信号如何被准确地表达，也关心研究如何成为可靠、可复现、能真正运行的系统。</p>
+      </header>
+
+      <a class="audio-project" href={research[0].href} target="_blank" rel="noreferrer">
+        <div class="project-index">
+          <span>R—01</span>
+          <span>2024—NOW</span>
+        </div>
+        <div class="project-main">
+          <p>{research[0].time}</p>
+          <h3>{research[0].title}</h3>
+          <span class="project-paper">{research[0].paper}</span>
+          <strong>{research[0].result}</strong>
+        </div>
+        <div class="audio-mark" aria-hidden="true">
+          <span>AC</span>
+          <div class="large-wave">
+            {waveform.map((height, index) => <i style={`--bar:${height}px;--delay:${index * -35}ms`}></i>)}
+          </div>
+          <small>Audio reconstruction / Signal → Sound</small>
+        </div>
+        <span class="project-arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="research-row" href={research[1].href} target="_blank" rel="noreferrer">
+        <span class="row-index">R—02</span>
+        <div>
+          <p>Computer Vision · 2025</p>
+          <h3>{research[1].title}</h3>
+        </div>
+        <div>
+          <p>{research[1].paper}</p>
+          <strong>{research[1].result}</strong>
+        </div>
+        <span aria-hidden="true">↗</span>
+      </a>
+
+      <div class="opensource">
+        <header>
+          <span>Code / 开源</span>
+          <a href={profile.github} target="_blank" rel="noreferrer">View GitHub ↗</a>
+        </header>
+        <div class="opensource-list">
+          {
+            openSource.map((item, index) => (
+              <a href={item.href} target="_blank" rel="noreferrer">
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{item.title}</strong>
+                <p>{item.description}</p>
+                <small>{item.meta}</small>
+                <i aria-hidden="true">↗</i>
+              </a>
+            ))
+          }
+        </div>
       </div>
     </section>
 
-    <section class="section" id="opensource" aria-labelledby="opensource-title">
-      <div class="section-heading">
-        <p class="eyebrow">Open Source</p>
-        <h2 id="opensource-title">开源与协作</h2>
-      </div>
-      <div class="work-list">
-        {
-          openSource.map((item) => (
-            <a class="work-item magnetic-card" href={item.href} target="_blank" rel="noreferrer">
-              <span class="work-meta">{item.meta}</span>
-              <strong>{item.title}</strong>
-              <p>{item.description}</p>
-              <span class="work-arrow" aria-hidden="true">↗</span>
-            </a>
-          ))
-        }
-      </div>
-    </section>
+    <section class="index-section" id="about" aria-labelledby="about-title">
+      <header class="section-heading">
+        <span class="section-number">03</span>
+        <div>
+          <p>About / 关于</p>
+          <h2 id="about-title">路径与工具</h2>
+        </div>
+        <p>从计算机科学走向软件工程，也持续从研究、开源和技术写作中建立自己的方法。</p>
+      </header>
 
-    <section class="section" id="awards" aria-labelledby="awards-title">
-      <div class="section-heading">
-        <p class="eyebrow">Awards</p>
-        <h2 id="awards-title">荣誉奖项</h2>
+      <div class="about-grid">
+        <article class="education-panel">
+          <header><span>Education</span><span>教育背景</span></header>
+          <div>
+            {
+              education.map((item, index) => (
+                <section>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <time>{item.time}</time>
+                  <h3>{item.school}</h3>
+                  <p>{item.major} · {item.degree}</p>
+                  <ul>{item.details.map((detail) => <li>{detail}</li>)}</ul>
+                </section>
+              ))
+            }
+          </div>
+        </article>
+
+        <article class="toolkit-panel">
+          <header><span>Toolkit</span><span>常用工具</span></header>
+          <div>
+            {
+              skills.map((item, index) => (
+                <section>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{item.group}</h3>
+                  <p>{item.items.join(" · ")}</p>
+                </section>
+              ))
+            }
+          </div>
+        </article>
       </div>
-      <div class="award-list">
-        {
-          awards.map((item) => (
-            <article class="award-item">
-              <time>{item.time}</time>
-              <div>
+
+      <div class="recognition-panel">
+        <header><span>Selected recognition</span><span>部分荣誉</span></header>
+        <div>
+          {
+            awards.slice(0, 3).map((item, index) => (
+              <article>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <time>{item.time}</time>
                 <h3>{item.title}</h3>
                 <p>{item.level}</p>
-              </div>
-            </article>
-          ))
-        }
+              </article>
+            ))
+          }
+        </div>
       </div>
     </section>
 
-    <section class="section" id="skills" aria-labelledby="skills-title">
-      <div class="section-heading">
-        <p class="eyebrow">Skills</p>
-        <h2 id="skills-title">专业技能</h2>
+    <section class="contact" aria-labelledby="contact-title">
+      <div class="contact-topline">
+        <span>04 / Contact</span>
+        <span>Open to ideas, research & collaboration</span>
       </div>
-      <div class="skill-grid">
-        {
-          skills.map((item) => (
-            <article>
-              <h3>{item.group}</h3>
-              <ul class="tag-list" aria-label={`${item.group} skills`}>
-                {item.items.map((skill) => (
-                  <li>{skill}</li>
-                ))}
-              </ul>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <section class="contact-section" id="contact" aria-labelledby="contact-title">
-      <div>
-        <p class="eyebrow">Contact</p>
-        <h2 id="contact-title">保持连接</h2>
-        <p>
-          欢迎通过邮箱、GitHub 或博客了解我的代码、文章与近期实践，也可以从技术博客中看到更完整的学习和项目记录。
-        </p>
-      </div>
-      <div class="link-panel">
-        {
-          links.map((item) => (
-            <a href={item.href} target={item.href.startsWith("mailto:") ? undefined : "_blank"} rel="noreferrer">
-              <span>
-                <strong>{item.label}</strong>
-                <small>{item.note}</small>
-              </span>
-              <span aria-hidden="true">↗</span>
-            </a>
-          ))
-        }
+      <h2 id="contact-title">有声音，<br />也有回应。</h2>
+      <div class="contact-bottom">
+        <p>如果你也在做 Audio、AI 系统，或只是想聊一个有趣的工程问题，欢迎给我写信。</p>
+        <a href={`mailto:${profile.email}`}><span>Start a conversation</span><strong>{profile.email}</strong><i aria-hidden="true">↗</i></a>
       </div>
     </section>
 
     <footer class="footer">
       <span>© {new Date().getFullYear()} {profile.name} / {profile.englishName}</span>
-      <span>Built with Astro</span>
+      <div>
+        {links.slice(0, 2).map((item) => <a href={item.href} target="_blank" rel="noreferrer">{item.label} ↗</a>)}
+      </div>
+      <a href="#top">Back to top ↑</a>
     </footer>
   </div>
 </Layout>
 
-<script>
-  const cards = document.querySelectorAll<HTMLElement>(".magnetic-card");
-
-  cards.forEach((card) => {
-    card.addEventListener("pointermove", (event) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty("--pointer-x", `${event.clientX - rect.left}px`);
-      card.style.setProperty("--pointer-y", `${event.clientY - rect.top}px`);
-    });
-  });
-</script>
-
 <style>
-  .site-shell {
+  .page-shell,
+  .masthead-inner {
     width: min(100%, var(--max-width));
     margin: 0 auto;
-    padding: 24px var(--page-padding) 40px;
   }
 
-  .topbar {
-    position: sticky;
-    top: 16px;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    min-height: 60px;
-    margin-bottom: 72px;
-    padding: 10px;
-    border: 1px solid rgba(223, 230, 223, 0.78);
-    border-radius: 8px;
-    background: color-mix(in srgb, var(--surface-color) 84%, transparent);
-    box-shadow: 0 20px 60px rgb(var(--shadow-color) / 0.08);
-    backdrop-filter: blur(18px);
+  .page-shell {
+    padding: 0 var(--page-padding) 34px;
   }
 
-  .brand,
-  .nav-links,
-  .hero-actions,
-  .link-panel a {
-    display: flex;
-    align-items: center;
+  .masthead {
+    position: relative;
+    z-index: 20;
+    border-bottom: 1px solid var(--line);
+    background: var(--page);
   }
 
-  .brand {
-    gap: 12px;
-    color: var(--text-color);
+  .masthead-inner {
+    display: grid;
+    grid-template-columns: 68px minmax(170px, 1fr) auto 100px;
+    align-items: stretch;
+    min-height: 68px;
+    padding: 0 var(--page-padding);
   }
 
-  .brand:hover,
-  .work-item:hover,
-  .research-item:hover,
-  .link-panel a:hover,
-  .button:hover {
+  .monogram {
+    display: grid;
+    width: 68px;
+    place-items: center;
+    border-right: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    color: var(--paper);
+    background: var(--ink);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  .masthead a:hover,
+  .audio-project:hover,
+  .research-row:hover,
+  .opensource a:hover,
+  .contact a:hover,
+  .footer a:hover {
     text-decoration: none;
   }
 
-  .brand strong,
-  .brand small {
-    display: block;
+  .masthead-inner > p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+    color: var(--ink);
+    line-height: 1.25;
   }
 
-  .brand strong {
-    font-size: 1rem;
-    line-height: 1.15;
-  }
-
-  .brand small {
-    color: var(--subtle-color);
+  .masthead-inner > p strong {
     font-size: 0.78rem;
-    line-height: 1.2;
   }
 
-  .brand-mark {
+  .masthead-inner > p span,
+  .hero-meta,
+  .hero-lower > div > span,
+  .focus-block > div > span,
+  .direction-bar > span,
+  .section-heading p,
+  .section-number,
+  .project-index,
+  .project-main > p,
+  .research-row > span,
+  .research-row > div > p:first-child,
+  .opensource header,
+  .experience-side,
+  .experience-main > p:first-child,
+  .about-grid header,
+  .recognition-panel > header,
+  .contact-topline,
+  .footer {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .masthead-inner > p span {
+    color: var(--tertiary);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  .masthead nav {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .masthead nav a {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 18px;
+    border-left: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 0.72rem;
+  }
+
+  .masthead nav a:last-child {
+    border-right: 1px solid var(--line);
+  }
+
+  .masthead nav a span {
+    color: var(--tertiary);
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.54rem;
+  }
+
+  .masthead nav a:hover {
+    color: #fff;
+    background: var(--blue);
+  }
+
+  .header-mail {
     display: grid;
-    width: 40px;
-    height: 40px;
     place-items: center;
-    border-radius: 8px;
-    color: #ffffff;
-    font-weight: 800;
-    background:
-      linear-gradient(135deg, rgba(21, 127, 111, 0.96), rgba(198, 95, 60, 0.9)),
-      var(--accent-color);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  }
-
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 6px;
-  }
-
-  .nav-links a {
-    padding: 8px 12px;
-    border-radius: 8px;
-    color: var(--muted-color);
-    font-size: 0.92rem;
-  }
-
-  .nav-links a:hover {
-    color: var(--text-color);
-    background: var(--surface-muted);
+    color: var(--blue);
+    font-size: 0.74rem;
+    font-weight: 600;
   }
 
   .hero {
+    min-height: calc(100svh - 68px);
+    border-right: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .hero-meta {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(310px, 0.52fr);
-    gap: 40px;
+    grid-template-columns: 1fr 1fr auto;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--line);
+    color: var(--secondary);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+  }
+
+  .hero-meta p {
+    display: flex;
     align-items: center;
-    min-height: calc(100vh - 188px);
-    padding-bottom: 42px;
+    gap: 9px;
+    color: inherit;
   }
 
-  .hero-copy,
-  .profile-card {
-    animation: rise-in 700ms ease both;
-  }
-
-  .profile-card {
-    animation-delay: 140ms;
-  }
-
-  .eyebrow,
-  .profile-kicker,
-  .work-meta,
-  .card-kicker {
-    color: var(--accent-strong);
-    font-size: 0.86rem;
-    font-weight: 700;
-  }
-
-  h1 {
-    max-width: 780px;
-    margin-top: 18px;
-    font-size: 4.35rem;
-  }
-
-  h1 span {
-    display: block;
-    color: var(--subtle-color);
-    font-size: 0.46em;
-  }
-
-  .tagline {
-    max-width: 760px;
-    margin-top: 20px;
-    color: var(--text-color);
-    font-size: 1.48rem;
-    line-height: 1.45;
-  }
-
-  .intro {
-    max-width: 740px;
-    margin-top: 18px;
-    font-size: 1.05rem;
-  }
-
-  .hero-actions {
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 28px;
-  }
-
-  .button {
-    display: inline-flex;
-    min-height: 46px;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 0 18px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-weight: 700;
-    transition:
-      transform 180ms ease,
-      border-color 180ms ease,
-      background 180ms ease;
-  }
-
-  .button:hover {
-    transform: translateY(-2px);
-  }
-
-  .button.primary {
-    color: #ffffff;
-    border-color: transparent;
-    background: var(--accent-strong);
-  }
-
-  .button.secondary {
-    color: var(--text-color);
-    background: var(--surface-color);
-  }
-
-  .profile-card,
-  .timeline-card,
-  .experience-card,
-  .info-card,
-  .work-item,
-  .research-item,
-  .contact-section,
-  .signal-strip,
-  .skill-grid article {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background: color-mix(in srgb, var(--surface-color) 92%, transparent);
-    box-shadow: 0 22px 70px rgb(var(--shadow-color) / 0.08);
-  }
-
-  .magnetic-card {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .magnetic-card::before {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    content: "";
-    opacity: 0;
-    background: radial-gradient(
-      360px circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
-      color-mix(in srgb, var(--accent-cool) 16%, transparent),
-      transparent 48%
-    );
-    transition: opacity 180ms ease;
-  }
-
-  .magnetic-card:hover::before {
-    opacity: 1;
-  }
-
-  .profile-card {
-    padding: 18px;
-  }
-
-  .profile-card-head {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 78px minmax(0, 1fr);
-    gap: 16px;
-    align-items: center;
-  }
-
-  .avatar-frame {
-    position: relative;
-    display: grid;
-    width: 78px;
-    height: 78px;
-    place-items: center;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background:
-      linear-gradient(135deg, rgba(21, 127, 111, 0.12), rgba(198, 95, 60, 0.14)),
-      var(--surface-muted);
-  }
-
-  .avatar-frame::after {
-    position: absolute;
-    right: -5px;
-    bottom: 8px;
-    width: 18px;
-    height: 18px;
-    border: 4px solid var(--surface-color);
+  .signal-dot {
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: var(--accent-warm);
-    content: "";
+    background: var(--signal);
+    box-shadow: 0 0 0 4px rgba(255, 77, 36, 0.12);
   }
 
-  .avatar-frame img {
+  .hero-name {
     position: relative;
-    z-index: 1;
-    width: 62px;
-    height: 62px;
-    border-radius: 8px;
-    object-fit: cover;
-    box-shadow: 0 10px 20px rgb(var(--shadow-color) / 0.16);
-  }
-
-  .profile-card-content,
-  .status-list,
-  .contact-list,
-  .timeline-card > *,
-  .experience-card > *,
-  .info-card > *,
-  .work-item > *,
-  .research-item > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  .profile-card h2 {
-    margin-top: 6px;
-    color: var(--text-color);
-    font-size: 1.3rem;
-  }
-
-  .profile-card p:last-child {
-    margin-top: 8px;
-    font-size: 0.92rem;
-    line-height: 1.55;
-  }
-
-  .status-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    margin-top: 16px;
-  }
-
-  .status-list div {
-    padding: 11px 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background: color-mix(in srgb, var(--surface-muted) 68%, transparent);
-  }
-
-  .status-list small,
-  .status-list strong,
-  .status-list span {
-    display: block;
-  }
-
-  .status-list small {
-    color: var(--accent-strong);
-    font-size: 0.76rem;
-    font-weight: 800;
-  }
-
-  .status-list strong {
-    margin-top: 3px;
-    color: var(--text-color);
-    font-size: 0.98rem;
-    line-height: 1.1;
-  }
-
-  .status-list span {
-    margin-top: 5px;
-    color: var(--subtle-color);
-    font-size: 0.8rem;
-    line-height: 1.45;
-  }
-
-  .contact-list {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
+    min-height: clamp(260px, 39vw, 450px);
+    align-items: center;
+    padding: 10px clamp(22px, 4vw, 52px) 20px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
   }
 
-  .contact-list a {
+  .hero-name::after {
+    position: absolute;
+    right: clamp(22px, 4vw, 52px);
+    bottom: 0;
+    left: clamp(22px, 4vw, 52px);
+    height: 5px;
+    content: "";
+    background: linear-gradient(90deg, var(--blue) 0 72%, var(--signal) 72% 77%, var(--ink) 77%);
+  }
+
+  .hero-name h1 {
+    color: var(--ink);
+    font-size: clamp(7.8rem, 18.5vw, 13.7rem);
+    font-weight: 700;
+    line-height: 0.72;
+    letter-spacing: -0.09em;
+    white-space: nowrap;
+    animation: title-in 750ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .hero-name h1 i {
+    color: var(--blue);
+    font-style: normal;
+  }
+
+  .hero-name > p {
+    position: absolute;
+    top: 28px;
+    right: clamp(22px, 4vw, 52px);
+    padding: 7px 10px;
+    color: var(--paper);
+    background: var(--ink);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .hero-lower {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr 0.92fr;
+    min-height: 270px;
+  }
+
+  .hero-lower > div,
+  .focus-block {
+    padding: clamp(24px, 3.2vw, 38px);
+  }
+
+  .hero-lower > div {
+    border-right: 1px solid var(--line);
+  }
+
+  .hero-lower > div > span,
+  .focus-block > div > span {
+    color: var(--tertiary);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+  }
+
+  .hero-statement h2 {
+    margin-top: 42px;
+    font-size: clamp(1.75rem, 3.2vw, 2.6rem);
+  }
+
+  .hero-bio > p {
+    margin-top: 38px;
+    font-size: 0.9rem;
+    line-height: 1.72;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 22px;
+    margin-top: 26px;
+  }
+
+  .hero-links a {
+    color: var(--blue);
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  .focus-block {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+    background: var(--blue);
+  }
+
+  .focus-block > div > span {
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  .focus-block strong {
+    display: block;
+    margin-top: 6px;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.055em;
+  }
+
+  .mini-wave,
+  .large-wave {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    min-height: 42px;
-    padding: 8px 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    color: var(--text-color);
-    background: var(--surface-color);
-    flex: 1 1 112px;
   }
 
-  .contact-list a:hover {
-    border-color: color-mix(in srgb, var(--accent-color) 48%, var(--border-color));
-    text-decoration: none;
+  .mini-wave {
+    gap: 4px;
+    height: 66px;
+    margin-top: 22px;
   }
 
-  .contact-list strong,
-  .contact-list small {
+  .mini-wave i,
+  .large-wave i {
     display: block;
+    width: 3px;
+    height: var(--bar);
+    border-radius: 999px;
+    background: currentColor;
+    transform-origin: center;
+    animation: signal 1.7s var(--delay) ease-in-out infinite alternate;
   }
 
-  .contact-list small {
-    display: none;
-    margin-top: 2px;
-    color: var(--subtle-color);
-    font-size: 0.78rem;
+  .mini-wave i {
+    flex: 1;
+    opacity: 0.76;
   }
 
-  .signal-strip {
+  .focus-note {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .direction-bar {
+    display: grid;
+    grid-template-columns: minmax(170px, 0.45fr) 1fr;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .direction-bar > span {
+    padding: 22px;
+    border-right: 1px solid var(--line);
+    color: var(--tertiary);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+  }
+
+  .direction-bar > div {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    overflow: hidden;
   }
 
-  .signal-strip div {
+  .direction-bar p {
     display: flex;
-    gap: 12px;
-    min-height: 116px;
+    align-items: center;
+    gap: 10px;
     padding: 22px;
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 0.72rem;
+    font-weight: 600;
   }
 
-  .signal-strip div:last-child {
+  .direction-bar p:last-child {
     border-right: 0;
   }
 
-  .signal-strip span {
-    flex: 0 0 auto;
-    width: 8px;
-    height: 8px;
-    margin-top: 10px;
-    border-radius: 50%;
-    background: var(--accent-warm);
+  .direction-bar i {
+    color: var(--tertiary);
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.55rem;
+    font-style: normal;
   }
 
-  .signal-strip p {
-    color: var(--text-color);
-    font-weight: 600;
-    line-height: 1.55;
-  }
-
-  .section {
-    padding: 96px 0 0;
+  .index-section {
+    padding-top: clamp(120px, 15vw, 185px);
   }
 
   .section-heading {
     display: grid;
-    grid-template-columns: 220px minmax(0, 1fr);
-    gap: 32px;
+    grid-template-columns: 70px 1fr minmax(280px, 0.72fr);
+    gap: clamp(22px, 4vw, 54px);
     align-items: end;
-    margin-bottom: 28px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--ink);
   }
 
-  .section-heading h2,
-  .contact-section h2 {
-    color: var(--text-color);
-    font-size: 2.4rem;
-  }
-
-  .timeline-grid,
-  .card-grid,
-  .skill-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .card-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .timeline-card,
-  .info-card,
-  .skill-grid article {
-    min-height: 250px;
-    padding: 24px;
-    transition:
-      transform 180ms ease,
-      border-color 180ms ease;
-  }
-
-  .timeline-card:hover,
-  .info-card:hover,
-  .work-item:hover,
-  .research-item:hover {
-    transform: translateY(-4px);
-    border-color: color-mix(in srgb, var(--accent-color) 42%, var(--border-color));
-  }
-
-  .timeline-meta,
-  .experience-head,
-  .award-item {
-    display: flex;
-    justify-content: space-between;
-    gap: 18px;
-  }
-
-  .timeline-meta span,
-  .timeline-meta time,
-  .experience-head time,
-  .award-item time,
-  .research-item small {
-    color: var(--subtle-color);
-    font-size: 0.86rem;
-    font-weight: 700;
-  }
-
-  .timeline-card h3,
-  .experience-card h3,
-  .info-card h3,
-  .skill-grid h3,
-  .award-item h3 {
-    color: var(--text-color);
-    font-size: 1.34rem;
-  }
-
-  .timeline-card h3,
-  .info-card h3,
-  .skill-grid h3 {
-    margin-top: 24px;
-  }
-
-  .timeline-card p,
-  .info-card p {
-    margin-top: 12px;
-  }
-
-  .compact-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 18px;
-    list-style: none;
-  }
-
-  .compact-list li,
-  .tag-list li {
-    padding: 6px 9px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    color: var(--muted-color);
-    background: var(--surface-muted);
+  .section-number {
+    color: var(--blue);
     font-size: 0.82rem;
   }
 
-  .experience-card {
-    padding: 26px;
+  .section-heading p {
+    color: var(--tertiary);
+    font-size: 0.58rem;
+    line-height: 1.7;
+    text-transform: uppercase;
+  }
+
+  .section-heading h2 {
+    margin-top: 12px;
+    font-size: clamp(3rem, 6vw, 5rem);
+  }
+
+  .section-heading > p {
+    color: var(--secondary);
+    text-transform: none;
+  }
+
+  .audio-project {
+    position: relative;
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1.05fr) minmax(280px, 0.82fr);
+    min-height: 540px;
+    color: #fff;
+    background: var(--blue);
+  }
+
+  .project-index,
+  .project-main,
+  .audio-mark {
+    padding: 32px;
+  }
+
+  .project-index {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-right: 1px solid rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.64);
+    font-size: 0.58rem;
+    writing-mode: vertical-rl;
+  }
+
+  .project-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .project-main > p {
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+  }
+
+  .project-main h3 {
+    max-width: 560px;
+    margin-top: 26px;
+    font-size: clamp(2.4rem, 5vw, 4.6rem);
+    line-height: 1;
+  }
+
+  .project-paper {
+    max-width: 570px;
+    margin-top: 32px;
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 0.76rem;
+    line-height: 1.6;
+  }
+
+  .project-main strong {
+    margin-top: 18px;
+    font-size: 0.76rem;
+  }
+
+  .audio-mark {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  .audio-mark > span {
+    align-self: flex-end;
+    font-size: clamp(5rem, 9vw, 8rem);
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.1em;
+    opacity: 0.18;
+  }
+
+  .large-wave {
+    gap: 3px;
+    height: 190px;
+    margin-top: 26px;
+  }
+
+  .large-wave i {
+    width: 2px;
+    flex: 1;
+    opacity: 0.86;
+  }
+
+  .audio-mark small {
+    margin-top: 28px;
+    color: rgba(255, 255, 255, 0.56);
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.52rem;
+    text-transform: uppercase;
+  }
+
+  .project-arrow {
+    position: absolute;
+    top: 28px;
+    right: 30px;
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transition: color 180ms ease, background 180ms ease;
+  }
+
+  .audio-project:hover .project-arrow {
+    color: var(--blue);
+    background: #fff;
+  }
+
+  .research-row {
+    display: grid;
+    grid-template-columns: 92px minmax(260px, 0.9fr) minmax(280px, 1fr) 30px;
+    gap: 30px;
+    align-items: center;
+    min-height: 190px;
+    padding: 30px 32px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    color: var(--ink);
+    transition: color 180ms ease, background 180ms ease;
+  }
+
+  .research-row:hover {
+    color: #fff;
+    background: var(--ink);
+  }
+
+  .row-index {
+    color: var(--tertiary);
+    font-size: 0.58rem;
+  }
+
+  .research-row > div > p:first-child {
+    color: var(--blue);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+  }
+
+  .research-row h3 {
+    margin-top: 12px;
+    font-size: clamp(1.35rem, 2.6vw, 2rem);
+  }
+
+  .research-row > div:nth-child(3) p {
+    color: var(--secondary);
+    font-size: 0.74rem;
+    line-height: 1.55;
+  }
+
+  .research-row:hover > div:nth-child(3) p {
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  .research-row > div:nth-child(3) strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.7rem;
+  }
+
+  .opensource {
+    margin-top: 76px;
+    border-top: 1px solid var(--ink);
+  }
+
+  .opensource > header,
+  .about-grid header,
+  .recognition-panel > header {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+  }
+
+  .opensource header a {
+    color: var(--blue);
+  }
+
+  .opensource-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .opensource-list a {
+    position: relative;
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 13px;
+    min-height: 210px;
+    padding: 28px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    transition: color 180ms ease, background 180ms ease;
+  }
+
+  .opensource-list a:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .opensource-list a:hover {
+    color: #fff;
+    background: var(--blue);
+  }
+
+  .opensource-list a > span {
+    color: var(--tertiary);
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.56rem;
+  }
+
+  .opensource-list strong {
+    font-size: 1.35rem;
+  }
+
+  .opensource-list p {
+    grid-column: 2 / -1;
+    max-width: 430px;
+    margin-top: 6px;
+    font-size: 0.78rem;
+  }
+
+  .opensource-list a:hover p,
+  .opensource-list a:hover small {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .opensource-list small {
+    grid-column: 2;
+    align-self: end;
+    color: var(--tertiary);
+    font-size: 0.62rem;
+  }
+
+  .opensource-list i {
+    position: absolute;
+    right: 26px;
+    bottom: 24px;
+    font-style: normal;
+  }
+
+  .experience-entry {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr) minmax(170px, 0.34fr);
+    min-height: 470px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    background: var(--paper);
+  }
+
+  .experience-side,
+  .experience-main,
+  .company-type {
+    padding: 36px;
+  }
+
+  .experience-side {
+    border-right: 1px solid var(--line);
+    color: var(--secondary);
+    font-size: 0.62rem;
+  }
+
+  .experience-side > span {
+    display: inline-block;
+    padding: 5px 8px;
+    color: #fff;
+    background: var(--ink);
+  }
+
+  .experience-side time,
+  .experience-side p {
+    display: block;
+    margin-top: 34px;
+    color: inherit;
+  }
+
+  .experience-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .experience-main > p:first-child {
+    color: var(--blue);
+    font-size: 0.64rem;
+    text-transform: uppercase;
+  }
+
+  .experience-main h3 {
+    max-width: 650px;
+    margin-top: 22px;
+    font-size: clamp(2rem, 4.5vw, 4rem);
   }
 
   .experience-summary {
-    max-width: 900px;
-    margin-top: 16px;
+    max-width: 700px;
+    margin-top: 32px;
+    font-size: 0.84rem;
+    line-height: 1.75;
   }
 
-  .card-index {
-    color: var(--accent-warm);
-    font-weight: 800;
-  }
-
-  .card-kicker {
-    margin-top: 18px;
-  }
-
-  .tag-list {
+  .experience-main ul {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 24px;
+    margin-top: 26px;
     list-style: none;
   }
 
-  .work-list,
-  .research-list,
-  .award-list {
+  .experience-main li {
+    padding: 5px 8px;
+    border: 1px solid var(--line);
+    font-family: "SFMono-Regular", Consolas, monospace;
+    color: var(--secondary);
+    font-size: 0.54rem;
+    text-transform: uppercase;
+  }
+
+  .company-type {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-left: 1px solid var(--line);
+    color: var(--blue);
+    font-size: clamp(2.7rem, 5vw, 4.6rem);
+    font-weight: 700;
+    line-height: 0.72;
+    letter-spacing: -0.09em;
+    writing-mode: vertical-rl;
+  }
+
+  .about-grid {
     display: grid;
-    gap: 12px;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .work-item,
-  .research-item {
-    position: relative;
+  .education-panel,
+  .toolkit-panel {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .education-panel {
+    border-left: 1px solid var(--line);
+  }
+
+  .toolkit-panel {
+    border-right: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .about-grid header,
+  .recognition-panel > header {
+    padding: 18px 24px;
+  }
+
+  .education-panel > div,
+  .toolkit-panel > div {
+    padding: 0 28px;
+  }
+
+  .education-panel section,
+  .toolkit-panel section {
     display: grid;
-    grid-template-columns: 170px minmax(160px, 0.38fr) minmax(0, 1fr) 34px;
-    gap: 18px;
-    align-items: center;
-    min-height: 118px;
-    padding: 22px;
-    color: var(--text-color);
-    transition:
-      transform 180ms ease,
-      border-color 180ms ease;
+    grid-template-columns: 38px 1fr;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--line);
   }
 
-  .research-item {
-    grid-template-columns: 140px minmax(190px, 0.46fr) minmax(220px, 1fr) minmax(320px, 0.5fr) 30px;
-  }
-
-  .work-item p,
-  .research-item p {
-    max-width: 680px;
-  }
-
-  .work-arrow {
-    color: var(--accent-warm);
-    font-size: 1.3rem;
-    justify-self: end;
-  }
-
-  .research-item small {
-    max-width: 340px;
-    line-height: 1.45;
-    white-space: nowrap;
-  }
-
-  .award-item {
-    align-items: flex-start;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .award-item:last-child {
+  .education-panel section:last-child,
+  .toolkit-panel section:last-child {
     border-bottom: 0;
   }
 
-  .award-item time {
-    flex: 0 0 96px;
+  .education-panel section > span,
+  .toolkit-panel section > span {
+    grid-row: 1 / 6;
+    color: var(--blue);
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.56rem;
   }
 
-  .award-item h3 {
-    font-size: 1.05rem;
+  .education-panel time {
+    color: var(--tertiary);
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.58rem;
   }
 
-  .award-item p {
-    margin-top: 4px;
+  .education-panel h3,
+  .toolkit-panel h3 {
+    margin-top: 10px;
+    font-size: 1.65rem;
   }
 
-  .skill-grid article {
-    min-height: auto;
+  .education-panel p,
+  .toolkit-panel p {
+    margin-top: 8px;
+    font-size: 0.74rem;
   }
 
-  .skill-grid h3 {
-    margin-top: 0;
+  .education-panel ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    margin-top: 18px;
+    color: var(--secondary);
+    font-size: 0.62rem;
+    list-style: none;
   }
 
-  .contact-section {
+  .toolkit-panel section {
+    min-height: 138px;
+  }
+
+  .recognition-panel {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .recognition-panel > div {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 360px;
-    gap: 40px;
-    align-items: center;
-    margin-top: 96px;
-    padding: 34px;
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  .contact-section p {
-    max-width: 650px;
-    margin-top: 14px;
+  .recognition-panel article {
+    min-height: 190px;
+    padding: 24px;
+    border-right: 1px solid var(--line);
   }
 
-  .link-panel {
-    display: grid;
-    gap: 10px;
+  .recognition-panel article:last-child {
+    border-right: 0;
   }
 
-  .link-panel a {
+  .recognition-panel article > span,
+  .recognition-panel time {
+    color: var(--tertiary);
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.56rem;
+  }
+
+  .recognition-panel time {
+    float: right;
+  }
+
+  .recognition-panel h3 {
+    margin-top: 54px;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .recognition-panel article p {
+    margin-top: 9px;
+    font-size: 0.68rem;
+  }
+
+  .contact {
+    margin-top: clamp(130px, 17vw, 210px);
+    padding: clamp(30px, 5vw, 58px);
+    color: #fff;
+    background: var(--ink);
+  }
+
+  .contact-topline {
+    display: flex;
     justify-content: space-between;
-    min-height: 72px;
-    padding: 16px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    color: var(--text-color);
-    background: var(--surface-muted);
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.58rem;
+    text-transform: uppercase;
   }
 
-  .link-panel a:hover {
-    border-color: color-mix(in srgb, var(--accent-color) 48%, var(--border-color));
+  .contact h2 {
+    margin-top: 70px;
+    font-size: clamp(4rem, 10vw, 8.8rem);
+    line-height: 0.88;
+    letter-spacing: -0.075em;
   }
 
-  .link-panel strong,
-  .link-panel small {
-    display: block;
+  .contact-bottom {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.65fr) minmax(400px, 1fr);
+    gap: 70px;
+    align-items: end;
+    margin-top: 100px;
   }
 
-  .link-panel small {
-    margin-top: 2px;
-    color: var(--subtle-color);
-    font-size: 0.82rem;
+  .contact-bottom > p {
+    max-width: 440px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.8rem;
+  }
+
+  .contact-bottom a {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+  }
+
+  .contact-bottom a span {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+  }
+
+  .contact-bottom a strong {
+    grid-row: 2;
+    margin-top: 8px;
+    font-size: clamp(1rem, 2.2vw, 1.55rem);
+  }
+
+  .contact-bottom a i {
+    grid-row: 1 / 3;
+    align-self: center;
+    color: var(--signal);
+    font-size: 1.5rem;
+    font-style: normal;
   }
 
   .footer {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 28px;
+    padding: 26px 0 0;
+    color: var(--tertiary);
+    font-size: 0.56rem;
+    text-transform: uppercase;
+  }
+
+  .footer > div {
     display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 34px 0 0;
-    color: var(--subtle-color);
-    font-size: 0.9rem;
+    gap: 20px;
   }
 
-  @keyframes rise-in {
-    from {
-      opacity: 0;
-      transform: translateY(18px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .footer a {
+    color: inherit;
   }
 
-  @media (max-width: 1040px) {
-    .topbar {
-      margin-bottom: 48px;
+  .footer > a {
+    justify-self: end;
+  }
+
+  @keyframes title-in {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes signal {
+    from { opacity: 0.45; transform: scaleY(0.62); }
+    to { opacity: 1; transform: scaleY(1); }
+  }
+
+  @media (max-width: 940px) {
+    .masthead-inner {
+      grid-template-columns: 68px 1fr auto;
     }
 
-    .hero,
-    .contact-section {
+    .masthead nav {
+      display: none;
+    }
+
+    .hero-lower {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .focus-block {
+      grid-column: 1 / -1;
+      min-height: 260px;
+    }
+
+    .hero-bio {
+      border-right: 0 !important;
+    }
+
+    .direction-bar {
       grid-template-columns: 1fr;
+    }
+
+    .direction-bar > span {
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-heading {
+      grid-template-columns: 55px 1fr;
+    }
+
+    .section-heading > p {
+      grid-column: 2;
+    }
+
+    .audio-project {
+      grid-template-columns: 72px 1fr;
+    }
+
+    .audio-mark {
+      grid-column: 2;
+      min-height: 310px;
+      border-top: 1px solid rgba(255, 255, 255, 0.28);
+      border-left: 0;
+    }
+
+    .research-row {
+      grid-template-columns: 60px 1fr 30px;
+    }
+
+    .research-row > div:nth-child(3) {
+      grid-column: 2;
+    }
+
+    .experience-entry {
+      grid-template-columns: 150px 1fr;
+    }
+
+    .company-type {
+      display: none;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .toolkit-panel {
+      border-top: 0;
+    }
+  }
+
+  @media (max-width: 660px) {
+    .masthead-inner {
+      grid-template-columns: 54px 1fr auto;
+      min-height: 56px;
+    }
+
+    .monogram {
+      width: 54px;
+    }
+
+    .masthead-inner > p {
+      padding-left: 14px;
+    }
+
+    .masthead-inner > p span {
+      display: none;
+    }
+
+    .header-mail {
+      padding-left: 12px;
+      font-size: 0.66rem;
     }
 
     .hero {
       min-height: auto;
     }
 
-    .profile-card {
-      max-width: 680px;
+    .hero-meta {
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      padding: 13px 14px;
     }
 
-    .card-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .hero-meta p:nth-child(2) {
+      display: none;
     }
 
-    .section-heading {
-      grid-template-columns: 1fr;
-      gap: 8px;
+    .hero-name {
+      min-height: 270px;
+      padding: 10px 16px;
     }
 
-    .work-item,
-    .research-item {
-      grid-template-columns: 140px minmax(150px, 0.44fr) minmax(0, 1fr) 28px;
-    }
-
-    .research-item small {
-      grid-column: 3;
-      max-width: none;
+    .hero-name h1 {
+      font-size: clamp(5.25rem, 26vw, 7rem);
+      line-height: 0.82;
       white-space: normal;
     }
-  }
 
-  @media (max-width: 780px) {
-    .site-shell {
-      padding-top: 14px;
+    .hero-name h1 span {
+      display: block;
     }
 
-    .topbar {
-      position: static;
-      align-items: flex-start;
-      margin-bottom: 42px;
+    .hero-name h1 span:nth-child(2) {
+      margin-left: 22%;
     }
 
-    .hero {
-      gap: 34px;
-      padding-bottom: 42px;
+    .hero-name > p {
+      top: 16px;
+      right: 16px;
     }
 
-    h1 {
-      font-size: 3.35rem;
+    .hero-name::after {
+      right: 16px;
+      left: 16px;
     }
 
-    .tagline {
-      font-size: 1.25rem;
-    }
-
-    .signal-strip,
-    .timeline-grid,
-    .card-grid,
-    .skill-grid {
+    .hero-lower {
       grid-template-columns: 1fr;
     }
 
-    .signal-strip div {
+    .hero-lower > div {
+      min-height: 220px;
       border-right: 0;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--line);
     }
 
-    .signal-strip div:last-child {
+    .focus-block {
+      grid-column: auto;
+    }
+
+    .direction-bar > div {
+      grid-template-columns: 1fr;
+    }
+
+    .direction-bar p {
+      padding: 15px 18px;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .direction-bar p:last-child {
       border-bottom: 0;
     }
 
-    .section {
-      padding-top: 70px;
+    .index-section {
+      padding-top: 110px;
     }
 
-    .section-heading h2,
-    .contact-section h2 {
-      font-size: 2rem;
+    .section-heading {
+      grid-template-columns: 38px 1fr;
+      gap: 14px;
+      padding-bottom: 24px;
     }
 
-    .experience-head,
-    .timeline-meta,
-    .award-item {
-      flex-direction: column;
-      gap: 6px;
+    .section-heading h2 {
+      font-size: 2.75rem;
     }
 
-    .work-item,
-    .research-item {
-      grid-template-columns: 1fr 28px;
-      gap: 10px 16px;
+    .audio-project {
+      display: block;
+      min-height: auto;
     }
 
-    .work-meta,
-    .work-item strong,
-    .work-item p,
-    .research-item strong,
-    .research-item p,
-    .research-item small {
+    .project-index {
+      display: flex;
+      padding: 18px 20px;
+      border-right: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+      writing-mode: initial;
+    }
+
+    .project-main,
+    .audio-mark {
+      padding: 28px 22px;
+    }
+
+    .project-main {
+      min-height: 430px;
+    }
+
+    .project-main h3 {
+      font-size: 2.75rem;
+    }
+
+    .audio-mark {
+      min-height: 270px;
+    }
+
+    .large-wave {
+      height: 150px;
+    }
+
+    .project-arrow {
+      top: 76px;
+      right: 20px;
+    }
+
+    .research-row {
+      grid-template-columns: 1fr 25px;
+      gap: 20px;
+      padding: 26px 22px;
+    }
+
+    .research-row > span,
+    .research-row > div:nth-child(3) {
       grid-column: 1 / -1;
     }
 
-    .work-arrow {
+    .research-row > span:last-child {
       grid-column: 2;
       grid-row: 1;
     }
 
-    .contact-section {
-      margin-top: 70px;
-      padding: 24px;
+    .opensource {
+      margin-top: 60px;
     }
 
-    .footer {
-      flex-direction: column;
-    }
-  }
-
-  @media (max-width: 520px) {
-    .brand small {
-      display: none;
-    }
-
-    .nav-links a {
-      padding: 8px 9px;
-    }
-
-    h1 {
-      font-size: 2.7rem;
-    }
-
-    .button {
-      width: 100%;
-    }
-
-    .profile-card,
-    .experience-card,
-    .contact-section {
-      padding: 18px;
-    }
-
-    .profile-card-head {
+    .opensource-list {
       grid-template-columns: 1fr;
     }
 
-    .avatar-frame {
-      width: 78px;
-      height: 78px;
+    .opensource-list a,
+    .opensource-list a:nth-child(2n) {
+      border-right: 0;
     }
 
-    .avatar-frame img {
-      width: 62px;
-      height: 62px;
+    .experience-entry {
+      display: block;
+    }
+
+    .experience-side {
+      padding: 22px;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .experience-side time,
+    .experience-side p {
+      display: inline-block;
+      margin: 0 0 0 16px;
+    }
+
+    .experience-main {
+      min-height: 530px;
+      padding: 28px 22px;
+    }
+
+    .experience-main h3 {
+      font-size: 2.6rem;
+    }
+
+    .education-panel > div,
+    .toolkit-panel > div {
+      padding: 0 20px;
+    }
+
+    .recognition-panel > div {
+      grid-template-columns: 1fr;
+    }
+
+    .recognition-panel article {
+      min-height: 150px;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .recognition-panel article:last-child {
+      border-bottom: 0;
+    }
+
+    .contact {
+      margin-right: calc(var(--page-padding) * -1);
+      margin-left: calc(var(--page-padding) * -1);
+      padding: 34px 22px;
+    }
+
+    .contact-topline span:last-child {
+      display: none;
+    }
+
+    .contact h2 {
+      margin-top: 74px;
+      font-size: clamp(4rem, 20vw, 5.5rem);
+    }
+
+    .contact-bottom {
+      grid-template-columns: 1fr;
+      gap: 38px;
+      margin-top: 110px;
+    }
+
+    .footer {
+      grid-template-columns: 1fr auto;
+    }
+
+    .footer > div {
+      display: none;
     }
   }
 </style>

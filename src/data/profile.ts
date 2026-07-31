@@ -2,15 +2,15 @@ export const profile = {
   name: "徐赫",
   englishName: "Xu He",
   handle: "xuhe2",
-  role: "ByteDance Intern · AI Infrastructure · Backend",
+  role: "Audio · AI · Software Engineering",
   location: "China",
   avatar: "https://github.com/xuhe2.png",
   email: "xuhe114514@gmail.com",
   github: "https://github.com/xuhe2",
   blog: "https://www.cnblogs.com/xuhe2",
-  tagline: "面向 AI 应用、后端基础设施和工程效率，构建可靠、可观测、可持续演进的软件系统。",
+  tagline: "让声音被理解、重建与创造。",
   intro:
-    "浙江理工大学计算机科学与技术（全英文授课）本科，推免至东南大学软件工程硕士。关注智能客服、RAG、后端服务、容器化与开源协作，也持续通过博客和项目记录技术实践。",
+    "我专注于软件工程与 AI 研究，最近在系统学习与探索 Audio 相关方向。毕业于浙江理工大学，推免至东南大学攻读软件工程硕士。",
 };
 
 export const links = [
@@ -22,7 +22,7 @@ export const links = [
   {
     label: "Blog",
     href: profile.blog,
-    note: "技术文章，71K+ 阅读",
+    note: "技术文章与学习记录",
   },
   {
     label: "Email",
@@ -52,8 +52,9 @@ export const experience = [
   {
     company: "字节跳动",
     role: "TikTok Product Infra 智能客服平台研发实习",
-    time: "2025.11 - 至今",
+    time: "2025.11.18 — 2026.05.15",
     location: "北京",
+    status: "已结束",
     summary:
       "在 TikTok Product Infra 智能客服平台参与 TicketBot 与 AI SOP 工程化建设，围绕 SOP 执行链路、二次进线服务策略、意图识别、监控告警和稳定性治理推进智能客服自动化，帮助提升 AI 服务覆盖和问题处理效率，降低人工客服工作量。",
     tags: ["AI Customer Support", "SOP Workflow", "LLM", "Observability", "Reliability"],
@@ -67,7 +68,7 @@ export const research = [
       "ACReNet: A Knowledge-Enhanced Neural Framework for High-Precision Audio Reconstruction from Basilar-Membrane Motion",
     href: "https://link.springer.com/chapter/10.1007/978-981-95-4088-4_6",
     result: "第一作者，CCF C 类会议 ICONIP Accept",
-    time: "2024.11 - 至今",
+    time: "Audio Reconstruction",
   },
   {
     title: "基于知识引导优化的多尺度特征融合钢材表面缺陷检测",
@@ -83,27 +84,27 @@ export const openSource = [
   {
     title: "sharelatex-ce",
     href: "https://github.com/xuhe2/sharelatex-ce",
-    meta: "35 Stars",
+    meta: "Docker · Self-hosting",
     description:
       "提供 ShareLaTeX-CE 私有化部署方案，使用 Docker 简化复杂环境配置，方便团队搭建 LaTeX 协作平台。",
   },
   {
     title: "github520cli",
     href: "https://github.com/xuhe2/github520cli",
-    meta: "6 Stars",
+    meta: "Go · CLI",
     description:
       "基于 Go 的 GitHub 访问优化工具，自动获取并解析可用 GitHub IP 地址，改善国内访问体验。",
   },
   {
     title: "Apache dubbo-go-samples",
     href: "https://github.com/apache/dubbo-go-samples/pull/920",
-    meta: "PR #920",
+    meta: "Open Source · PR #920",
     description: "向 Apache/dubbo-go-samples 提交 Pull Request，参与分布式服务框架 Go 实现案例社区协作。",
   },
   {
     title: "chaoxing",
     href: "https://github.com/Samueli924/chaoxing/pull/366",
-    meta: "2.4K Stars Project",
+    meta: "Open Source · PR #366",
     description: "参与 chaoxing 项目的 Issue #365 与 PR #366 贡献。",
   },
 ];
@@ -133,29 +134,21 @@ export const awards = [
 
 export const skills = [
   {
-    group: "Languages",
-    items: ["Golang", "Python", "C/C++"],
+    group: "Audio & AI",
+    items: ["Audio Reconstruction", "Audio Intelligence", "Deep Learning", "RAG", "LLM Applications"],
   },
   {
-    group: "Backend",
-    items: ["Kitex", "Gin", "gRPC", "dubbo-go", "GORM", "FastAPI", "Flask"],
+    group: "Engineering",
+    items: ["Golang", "Python", "C/C++", "Kitex", "Gin", "gRPC", "FastAPI"],
   },
   {
-    group: "AI & Data",
-    items: ["LangChain", "Milvus", "RAG", "LLM Deployment", "YOLO", "Prompt Engineering"],
-  },
-  {
-    group: "Infrastructure",
+    group: "Systems & Infrastructure",
     items: ["Docker", "Linux", "PostgreSQL", "Redis", "RabbitMQ", "Git", "Makefile"],
-  },
-  {
-    group: "Frontend",
-    items: ["Vue", "Uniapp", "Markdown"],
   },
 ];
 
 export const principles = [
-  "把复杂链路拆成可观察、可回滚、可迭代的系统。",
-  "先保证准确性和稳定性，再追求更大的自动化覆盖面。",
-  "用工程化方式沉淀实验、项目和线上问题的复盘。",
+  "Audio Exploration",
+  "Reliable AI Systems",
+  "Open Source",
 ];

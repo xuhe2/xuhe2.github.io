@@ -13,7 +13,7 @@ const { title, description = "徐赫的个人主页" } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f7f8f5" />
+    <meta name="theme-color" content="#f0eee8" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -22,6 +22,7 @@ const { title, description = "徐赫的个人主页" } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
+    <a class="skip-link" href="#content">跳到主要内容</a>
     <main id="content">
       <slot />
     </main>
@@ -31,20 +32,17 @@ const { title, description = "徐赫的个人主页" } = Astro.props;
 <style is:global>
   :root {
     color-scheme: light;
-    --bg-color: #f7f8f5;
-    --surface-color: #ffffff;
-    --surface-muted: #eef3ef;
-    --text-color: #151b18;
-    --muted-color: #5f6d64;
-    --subtle-color: #7d8b82;
-    --border-color: #dfe6df;
-    --accent-color: #157f6f;
-    --accent-strong: #0f5f54;
-    --accent-warm: #c65f3c;
-    --accent-cool: #3d6f9f;
-    --shadow-color: 34 49 39;
-    --max-width: 1120px;
-    --page-padding: 24px;
+    --page: #f0eee8;
+    --paper: #f8f6f0;
+    --ink: #171714;
+    --secondary: #626159;
+    --tertiary: #8c8a80;
+    --line: rgba(23, 23, 20, 0.2);
+    --blue: #2447f9;
+    --blue-dark: #1630c9;
+    --signal: #ff4d24;
+    --max-width: 1180px;
+    --page-padding: clamp(20px, 4vw, 44px);
   }
 
   * {
@@ -55,24 +53,23 @@ const { title, description = "徐赫的个人主页" } = Astro.props;
 
   html {
     font-family:
-      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      "Helvetica Neue", Helvetica, Arial,
       "PingFang SC", "Microsoft YaHei", sans-serif;
     font-size: 16px;
-    color: var(--text-color);
-    background-color: var(--bg-color);
+    color: var(--ink);
+    background: var(--page);
     scroll-behavior: smooth;
+    scroll-padding-top: 88px;
   }
 
   body {
     min-width: 320px;
     min-height: 100vh;
-    line-height: 1.7;
+    line-height: 1.55;
     overflow-x: hidden;
-    background:
-      linear-gradient(rgba(21, 27, 24, 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(21, 27, 24, 0.045) 1px, transparent 1px),
-      linear-gradient(145deg, #f7f8f5 0%, #f1f6f3 44%, #fbf7f1 100%);
-    background-size: 44px 44px, 44px 44px, auto;
+    background: var(--page);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   main {
@@ -80,9 +77,9 @@ const { title, description = "徐赫的个人主页" } = Astro.props;
   }
 
   a {
-    color: var(--accent-color);
+    color: var(--blue);
     text-decoration: none;
-    text-underline-offset: 0.22em;
+    text-underline-offset: 0.18em;
   }
 
   a:hover {
@@ -91,7 +88,7 @@ const { title, description = "徐赫的个人主页" } = Astro.props;
 
   a:focus-visible,
   button:focus-visible {
-    outline: 3px solid rgba(21, 127, 111, 0.28);
+    outline: 3px solid rgba(36, 71, 249, 0.32);
     outline-offset: 3px;
   }
 
@@ -105,21 +102,39 @@ const { title, description = "徐赫的个人主页" } = Astro.props;
   h2,
   h3 {
     font-weight: 600;
-    line-height: 1.15;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
   }
 
   p {
-    color: var(--muted-color);
+    color: var(--secondary);
   }
 
   ::selection {
     color: #ffffff;
-    background: var(--accent-strong);
+    background: var(--blue);
+  }
+
+  .skip-link {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+    padding: 9px 14px;
+    border-radius: 999px;
+    color: #fff;
+    background: var(--blue);
+    transform: translateY(-160%);
+    transition: transform 160ms ease;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
   }
 
   @media (max-width: 760px) {
     :root {
-      --page-padding: 18px;
+      --page-padding: 20px;
     }
   }
 
@@ -134,29 +149,4 @@ const { title, description = "徐赫的个人主页" } = Astro.props;
     }
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      color-scheme: dark;
-      --bg-color: #101411;
-      --surface-color: #171d19;
-      --surface-muted: #1e2821;
-      --text-color: #edf3ee;
-      --muted-color: #aab8ae;
-      --subtle-color: #859489;
-      --border-color: #2d3931;
-      --accent-color: #63c7b8;
-      --accent-strong: #8bded3;
-      --accent-warm: #e19879;
-      --accent-cool: #8eb5df;
-      --shadow-color: 0 0 0;
-    }
-
-    body {
-      background:
-        linear-gradient(rgba(237, 243, 238, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(237, 243, 238, 0.04) 1px, transparent 1px),
-        linear-gradient(145deg, #101411 0%, #121a16 48%, #181612 100%);
-      background-size: 44px 44px, 44px 44px, auto;
-    }
-  }
 </style>
